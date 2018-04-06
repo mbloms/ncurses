@@ -47,7 +47,7 @@ VERSION = $(NCURSES_MAJOR).$(NCURSES_MINOR)
 #	--without-manpage-renames
 # on Debian/testing.  The -scrollbar and -width options are used to make lynx
 # use 79 columns as it did in 2.8.5 and before.
-DUMP	= lynx -dump -scrollbar=0 -width=79 -display_charset=US-ASCII
+DUMP	= lynx -dump -scrollbar=0 -width=79
 DUMP2	= $(DUMP) -nolist
 
 # gcc's file is "gnathtml.pl"
@@ -83,6 +83,12 @@ doc/ncurses-intro.doc: doc/html/ncurses-intro.html
 doc/hackguide.doc: doc/html/hackguide.html
 	$(DUMP2) doc/html/hackguide.html > $@
 
+# This is the original command:
+#	MANPROG	= tbl | nroff -man
+#
+# This happens to work for groff 1.18.1 on Debian.  At some point groff's
+# maintainer changed the line-length (we do not want/need that here).
+#
 # The distributed html files are formatted using
 #	configure --without-manpage-renames
 #
@@ -90,7 +96,7 @@ doc/hackguide.doc: doc/html/hackguide.html
 # If that conflicts with the --without-manpage-renames, you can install those
 # in a different location using the --with-install-prefix option of the
 # configure script.
-MANPROG	= tbl | nroff -mandoc -rLL=78n -rLT=78n -Tascii
+MANPROG	= tbl | nroff -mandoc -rLL=65n -rLT=71n -Tascii
 
 manhtml:
 	@for f in doc/html/man/*.html; do \

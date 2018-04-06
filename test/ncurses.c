@@ -4162,7 +4162,7 @@ show_wacs_chars_double(int repeat, attr_t attr, NCURSES_PAIRS_T pair)
     n = show_1_wacs(n, repeat, BOTH2(WACS_DEGREE));
     n = show_1_wacs(n, repeat, BOTH2(WACS_DIAMOND));
     n = show_1_wacs(n, repeat, BOTH2(WACS_PLMINUS));
-    n = show_1_wacs(n, repeat, BOTH2(WACS_D_PLUS));
+    n = show_1_wacs(n, repeat, BOTH2(WACS_PLUS));
 
 #ifdef CURSES_WACS_ARRAY
     n = show_1_wacs(n, repeat, BOTH2(WACS_GEQUAL));
@@ -4223,7 +4223,7 @@ show_wacs_chars_thick(int repeat, attr_t attr, NCURSES_PAIRS_T pair)
     n = show_1_wacs(n, repeat, BOTH2(WACS_DEGREE));
     n = show_1_wacs(n, repeat, BOTH2(WACS_DIAMOND));
     n = show_1_wacs(n, repeat, BOTH2(WACS_PLMINUS));
-    n = show_1_wacs(n, repeat, BOTH2(WACS_T_PLUS));
+    n = show_1_wacs(n, repeat, BOTH2(WACS_PLUS));
 
 #ifdef CURSES_WACS_ARRAY
     n = show_1_wacs(n, repeat, BOTH2(WACS_GEQUAL));
