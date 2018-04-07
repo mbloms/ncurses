@@ -842,30 +842,6 @@ fmt_complex(TERMTYPE2 *tterm, const char *capability, char *src, int level)
     return src;
 }
 
-/*
- * Make "large" numbers a little easier to read by showing them in hexadecimal
- * if they are "close" to a power of two.
- */
-static const char *
-number_format(int value)
-{
-    const char *result = "%d";
-    if ((outform != F_TERMCAP) && (value > 255)) {
-	unsigned long lv = (unsigned long) value;
-	unsigned long mm;
-	int bits = sizeof(unsigned long) * 8;
-	int nn;
-	for (nn = 8; nn < bits; ++nn) {
-	    mm = 1UL << nn;
-	    if ((mm - 16) <= lv && (mm + 16) > lv) {
-		result = "%#x";
-		break;
-	    }
-	}
-    }
-    return result;
-}
-
 #define SAME_CAP(n,cap) (&tterm->Strings[n] == &cap)
 #define EXTRA_CAP 20
 
@@ -961,13 +937,8 @@ fmt_entry(TERMTYPE2 *tterm,
 		_nc_SPRINTF(buffer, _nc_SLIMIT(sizeof(buffer))
 			    "%s@", name);
 	    } else {
-		size_t nn;
 		_nc_SPRINTF(buffer, _nc_SLIMIT(sizeof(buffer))
-			    "%s#", name);
-		nn = strlen(buffer);
-		_nc_SPRINTF(buffer + nn, _nc_SLIMIT(sizeof(buffer) - nn)
-			    number_format(tterm->Numbers[i]),
-			    tterm->Numbers[i]);
+			    "%s#%d", name, tterm->Numbers[i]);
 		if (i + 1 > num_values)
 		    num_values = i + 1;
 	    }
